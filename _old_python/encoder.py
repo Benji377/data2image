@@ -36,7 +36,7 @@ def file_to_image(file_path):
 
         # Create and save the image
         img = Image.fromarray(pixel_array, 'RGBA')
-        output_image_path = f"{file_name}.png"
+        output_image_path = os.path.join('output', file_name + '.png')
         img.save(output_image_path)
 
         print(f"File '{file_path}' has been successfully encoded into image '{output_image_path}'.")

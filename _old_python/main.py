@@ -8,7 +8,8 @@ from decoder import image_to_file
 def main():
     try:
         # Get user input for file path and number of cores
-        file_path = input("Enter the path of the file to encode and decode: ").strip()
+        # file_path = input("Enter the path of the file to encode and decode: ").strip()
+        file_path = r"C:\Users\benja\Downloads\favicon.svg"
 
         # Normalize the file path
         normalized_path = os.path.normpath(file_path)
@@ -27,6 +28,7 @@ def main():
         # Measure decoding time
         start_time = time.time()
         decoded_file_path = image_to_file(encoded_image_path)
+        #decoded_file_path = image_to_file(normalized_path)
         decoding_time = time.time() - start_time
 
         # Verify if the original file and decoded file are the same

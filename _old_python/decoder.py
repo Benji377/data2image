@@ -27,9 +27,10 @@ def image_to_file(image_path):
         compressed_bytes = combined_bytes[2 + name_length:].rstrip(b'\x00')
         file_bytes = zlib.decompress(compressed_bytes)
 
-        # Write the original file
-        with open(file_name, 'wb') as f:
-            f.write(file_bytes)
+        # Write the original file to the output directory
+        file_name = os.path.join('output', file_name)
+        with open(file_name, 'wb') as file:
+            file.write(file_bytes)
 
         print(f"Image '{image_path}' has been successfully decoded and file saved as '{file_name}'.")
 

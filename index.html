@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File to Image Encoder/Decoder</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js" integrity="sha512-g2TeAWw5GPnX7z0Kn8nFbYfeHcvAu/tx6d6mrLe/90mkCxO+RcptyYpksUz35EO337F83bZwcmUyHiHamspkfg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./scripts/UPNG.js"></script>
+    <script type="module" src="./scripts/encoder.js" defer></script>
+    <script type="module" src="./scripts/decoder.js" defer></script>
+</head>
+<body>
+<h1>File to Image Encoder/Decoder</h1>
+<input type="file" id="fileInput">
+<br><br>
+<button id="encodeButton">Encode to Image</button>
+<button id="decodeButton">Decode from Image</button>
+<br><br>
+<canvas id="canvas" style="display: none;"></canvas>
+</body>
+</html>

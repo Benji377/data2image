@@ -12,7 +12,7 @@ Data2Image allows you to transform any file into a PNG image and revert it back 
 
 - **Decoder**: This script decodes the previously encoded PNG image back into the original file. It retrieves the file name and extension from the encoded data, ensuring that the complete original file is restored. To use the decoder, provide the path to the encoded image.
 
-- **Main File**: `main.py` serves as a demonstration of how the encoder and decoder methods can be utilized. It can be customized to fit specific needs or to benchmark the encoding and decoding performance on your system.
+- **Main File**: `_old_python/main.py` serves as a demonstration of how the encoder and decoder methods can be utilized. It can be customized to fit specific needs or to benchmark the encoding and decoding performance on your system.
 
 ## Limitations
 

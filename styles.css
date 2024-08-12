@@ -1,0 +1,95 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: #333;
+}
+
+/* Banner Styling */
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px;
+    text-align: right;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+header a:hover {
+    color: #ddd;
+}
+
+/* Title Styling */
+h1 {
+    margin-bottom: 30px;
+    font-size: 36px;
+    color: #444;
+}
+
+/* Drop Area Styling */
+#fileInput {
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    border: 2px dashed #aaa;
+    border-radius: 10px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+/* Button Styling */
+button {
+    padding: 15px 30px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#encodeButton {
+    background-color: #28a745;
+    color: white;
+}
+
+#encodeButton:hover {
+    background-color: #218838;
+}
+
+#decodeButton {
+    background-color: #007bff;
+    color: white;
+}
+
+#decodeButton:hover {
+    background-color: #0056b3;
+}
+
+/* Canvas Styling (Hidden) */
+canvas {
+    display: none;
+}

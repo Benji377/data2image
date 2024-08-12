@@ -8,8 +8,7 @@ from decoder import image_to_file
 def main():
     try:
         # Get user input for file path and number of cores
-        # file_path = input("Enter the path of the file to encode and decode: ").strip()
-        file_path = r"C:\Users\benja\Downloads\favicon.svg"
+        file_path = input("Enter the path of the file to encode and decode: ").strip()
 
         # Normalize the file path
         normalized_path = os.path.normpath(file_path)

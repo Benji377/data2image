@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@data2image/core": "^1.0.0",
+    "@data2image/core": "^1.0.2",
     "jszip": "^3.10.1"
   },
   "devDependencies": {

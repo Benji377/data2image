@@ -1,5 +1,15 @@
 # Data2Image
 
+[![ci]](https://github.com/Benji377/data2image/actions/workflows/ci.yml)
+[![deploy]](https://github.com/Benji377/data2image/actions/workflows/deploy.yml)
+[![npm-core]](https://www.npmjs.com/package/@data2image/core)
+[![npm-cli]](https://www.npmjs.com/package/data2image)
+
+[ci]: https://img.shields.io/github/actions/workflow/status/Benji377/data2image/ci.yml?label=CI&logo=githubactions&style=for-the-badge&labelColor=555555
+[deploy]: https://img.shields.io/github/actions/workflow/status/Benji377/data2image/deploy.yml?label=Deploy&logo=githubactions&style=for-the-badge&labelColor=555555
+[npm-core]: https://img.shields.io/npm/v/%40data2image%2Fcore?label=%40data2image%2Fcore&logo=npm&style=for-the-badge&labelColor=555555
+[npm-cli]: https://img.shields.io/npm/v/data2image?label=data2image&logo=npm&style=for-the-badge&labelColor=555555
+
 **Convert any file into a PNG image and back.**
 
 Data2Image encodes arbitrary files into lossless PNG images where every pixel stores your data. The original file can be perfectly restored from the image at any time.

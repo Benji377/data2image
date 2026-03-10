@@ -148,9 +148,15 @@ function renderFileList() {
 }
 
 function escapeHtml(text: string): string {
-  const div = document.createElement("div");
-  div.textContent = text;
-  return div.innerHTML;
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+    '/': '&#x2F;'
+  };
+  return text.replace(/[&<>"'\/]/g, (char) => map[char]);
 }
 
 clearBtn.addEventListener("click", () => {

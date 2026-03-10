@@ -138,25 +138,25 @@ function renderFileList() {
   for (const { file, mode } of queue) {
     const li = document.createElement("li");
     li.className = "file-item";
-    li.innerHTML = `
-      <span class="file-item-name" title="${escapeHtml(file.name)}">${escapeHtml(file.name)}</span>
-      <span class="file-item-size">${formatSize(file.size)}</span>
-      <span class="file-item-badge ${mode === "encode" ? "badge-encode" : "badge-decode"}">${mode.toUpperCase()}</span>
-    `;
+    
+    const nameSpan = document.createElement("span");
+    nameSpan.className = "file-item-name";
+    nameSpan.title = file.name;
+    nameSpan.textContent = file.name;
+    
+    const sizeSpan = document.createElement("span");
+    sizeSpan.className = "file-item-size";
+    sizeSpan.textContent = formatSize(file.size);
+    
+    const badge = document.createElement("span");
+    badge.className = `file-item-badge ${mode === "encode" ? "badge-encode" : "badge-decode"}`;
+    badge.textContent = mode.toUpperCase();
+    
+    li.appendChild(nameSpan);
+    li.appendChild(sizeSpan);
+    li.appendChild(badge);
     fileItems.appendChild(li);
   }
-}
-
-function escapeHtml(text: string): string {
-  const map: Record<string, string> = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#x27;',
-    '/': '&#x2F;'
-  };
-  return text.replace(/[&<>"'\/]/g, (char) => map[char]);
 }
 
 clearBtn.addEventListener("click", () => {
@@ -257,12 +257,23 @@ function addResultItem(name: string, data: Uint8Array, previewUrl?: string) {
 function addResultError(name: string, message: string) {
   const li = document.createElement("li");
   li.className = "result-item";
-  li.innerHTML = `
-    <div class="result-item-info">
-      <span class="result-item-name" title="${escapeHtml(name)}">${escapeHtml(name)}</span>
-    </div>
-    <span class="result-item-error" title="${escapeHtml(message)}">Error</span>
-  `;
+  
+  const info = document.createElement("div");
+  info.className = "result-item-info";
+  
+  const nameSpan = document.createElement("span");
+  nameSpan.className = "result-item-name";
+  nameSpan.title = name;
+  nameSpan.textContent = name;
+  info.appendChild(nameSpan);
+  
+  const errorSpan = document.createElement("span");
+  errorSpan.className = "result-item-error";
+  errorSpan.title = message;
+  errorSpan.textContent = "Error";
+  
+  li.appendChild(info);
+  li.appendChild(errorSpan);
   resultItems.appendChild(li);
 }
 

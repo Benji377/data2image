@@ -43,8 +43,8 @@
     "upng-js": "^2.1.0"
   },
   "devDependencies": {
+    "@types/pako": "^2.0.3",
     "tsup": "^8.0.0",
-    "vitest": "^4.0.0",
-    "@types/pako": "^2.0.3"
+    "vitest": "^4.0.0"
   }
 }

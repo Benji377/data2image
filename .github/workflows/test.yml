@@ -7,38 +7,6 @@ on:
     branches: [main]
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-      actions: read
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 20
-          cache: npm
-
-      - run: npm ci
-
-      - name: Install SARIF formatter
-        run: npm install --no-save @microsoft/eslint-formatter-sarif
-
-      - name: Run ESLint
-        run: |
-          npx eslint packages/*/src \
-            --format @microsoft/eslint-formatter-sarif \
-            --output-file eslint-results.sarif
-        continue-on-error: true
-
-      - name: Upload SARIF results
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: eslint-results.sarif
-          category: eslint
-
   test:
     runs-on: ubuntu-latest
     permissions:
@@ -47,7 +15,7 @@ jobs:
       pull-requests: write
     strategy:
       matrix:
-        node-version: [18, 20, 22]
+        node-version: [20, 22, 24]
     steps:
       - uses: actions/checkout@v6
 

@@ -74,6 +74,13 @@ function formatSize(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
+function getErrorMessage(err: unknown): string {
+  if (err instanceof Error) {
+    return err.message;
+  }
+  return "Unknown error";
+}
+
 function isD2iPng(file: File): boolean {
   return file.name.endsWith(".d2i.png");
 }
@@ -255,7 +262,7 @@ async function processAll() {
       }
     } catch (err) {
       const errorName = mode === "encode" ? file.name : file.name;
-      addResultError(errorName, err instanceof Error ? err.message : "Unknown error");
+      addResultError(errorName, getErrorMessage(err));
     }
   }
 
@@ -294,7 +301,7 @@ async function processSingle(index: number) {
     queue.splice(index, 1);
     renderFileList();
   } catch (err) {
-    addResultError(file.name, err instanceof Error ? err.message : "Unknown error");
+    addResultError(file.name, getErrorMessage(err));
   }
 }
 

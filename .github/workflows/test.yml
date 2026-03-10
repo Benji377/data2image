@@ -35,4 +35,4 @@ jobs:
           name: Test Results (Node ${{ matrix.node-version }})
           path: packages/core/test-results.xml
           reporter: java-junit
-          fail-on-error: false
+          fail-on-error: true

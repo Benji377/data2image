@@ -34,11 +34,7 @@ jobs:
       - name: Publish @data2image/core
         if: ${{ inputs.package == 'core' || inputs.package == 'both' }}
         run: npm publish --workspace=packages/core --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish data2image (CLI)
         if: ${{ inputs.package == 'cli' || inputs.package == 'both' }}
         run: npm publish --workspace=packages/cli --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

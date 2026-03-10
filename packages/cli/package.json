@@ -1,0 +1,40 @@
+{
+  "name": "data2image",
+  "version": "1.0.0",
+  "description": "CLI tool to convert any file to a PNG image and back.",
+  "type": "module",
+  "bin": {
+    "data2image": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup"
+  },
+  "keywords": [
+    "data2image",
+    "file-to-image",
+    "encoder",
+    "decoder",
+    "png",
+    "cli"
+  ],
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Benji377/data2image",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/Benji377/data2image",
+  "dependencies": {
+    "@data2image/core": "^1.0.0",
+    "commander": "^13.0.0",
+    "ora": "^8.0.0",
+    "glob": "^11.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "@types/node": "^22.0.0"
+  }
+}

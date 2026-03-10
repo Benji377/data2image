@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "workspaces": [
+    "packages/core",
+    "packages/cli",
+    "packages/web"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspace=packages/core",
+    "lint": "eslint packages/*/src",
+    "dev:web": "npm run dev --workspace=packages/web"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}

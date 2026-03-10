@@ -23,6 +23,9 @@ jobs:
 
       - run: npm ci
 
+      - name: Build core (types needed by dependents)
+        run: npm run build --workspace=packages/core
+
       - name: Install SARIF formatter
         run: npm install --no-save @microsoft/eslint-formatter-sarif
 

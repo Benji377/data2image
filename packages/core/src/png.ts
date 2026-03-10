@@ -8,6 +8,6 @@ interface UPNGModule {
 }
 
 // Handle CJS double-wrapping: some environments put the module at .default
-const UPNG: UPNGModule = (_UPNG as any).default || _UPNG;
+const UPNG: UPNGModule = (_UPNG as { default?: UPNGModule } & UPNGModule).default || _UPNG;
 
 export default UPNG;

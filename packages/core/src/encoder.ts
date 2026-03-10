@@ -76,6 +76,6 @@ export function encode(data: Uint8Array, filename: string): Uint8Array {
   // Rest is already zero-filled (padding)
 
   // Create PNG (ps=0 for lossless, forbidPlte=true to keep raw RGBA)
-  const png = UPNG.encode([buffer.buffer as ArrayBuffer], sideLength, sideLength, 0, undefined, true);
+  const png = UPNG.encode([buffer.buffer], sideLength, sideLength, 0, undefined, true);
   return new Uint8Array(png);
 }

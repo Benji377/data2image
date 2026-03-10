@@ -1,5 +1,5 @@
 import "./styles.css";
-import { encode, decode, matchesMagic } from "@data2image/core";
+import { encode, decode } from "@data2image/core";
 import JSZip from "jszip";
 
 // ── DOM Elements ──────────────────────────────────────────
@@ -76,7 +76,7 @@ function readFileAsUint8Array(file: File): Promise<Uint8Array> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(new Uint8Array(reader.result as ArrayBuffer));
-    reader.onerror = () => reject(reader.error);
+    reader.onerror = () => reject(reader.error || new Error("Failed to read file"));
     reader.readAsArrayBuffer(file);
   });
 }
@@ -165,7 +165,9 @@ clearBtn.addEventListener("click", () => {
 });
 
 // ── Processing ────────────────────────────────────────────
-processBtn.addEventListener("click", processAll);
+processBtn.addEventListener("click", () => {
+  void processAll();
+});
 
 async function processAll() {
   if (queue.length === 0) return;
@@ -278,7 +280,8 @@ function addResultError(name: string, message: string) {
 }
 
 // ── Download All (ZIP) ────────────────────────────────────
-downloadAllBtn.addEventListener("click", async () => {
+downloadAllBtn.addEventListener("click", () => {
+  void (async () => {
   if (resultEntries.length === 0) return;
 
   downloadAllBtn.setAttribute("disabled", "true");
@@ -299,4 +302,5 @@ downloadAllBtn.addEventListener("click", async () => {
 
   downloadAllBtn.removeAttribute("disabled");
   downloadAllBtn.textContent = "Download All (ZIP)";
+  })();
 });

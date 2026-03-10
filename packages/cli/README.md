@@ -8,8 +8,6 @@ Convert any file to a PNG image and back, from the command line.
 npm install -g data2image
 ```
 
-> **📄 License:** This tool is [GPLv3 licensed](LICENSE) (copyleft) — derivatives must be open source. For a permissive library, use [@data2image/core](https://www.npmjs.com/package/@data2image/core) (MIT).
-
 ## Usage
 
 ### Encode a file

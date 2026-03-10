@@ -10,8 +10,6 @@ This is the core encoder/decoder library for Data2Image. Works in Node.js, Deno,
 npm install @data2image/core
 ```
 
-> **📄 License:** This library is [MIT licensed](LICENSE) — use it freely in any project, open or closed source.
-
 ## Usage
 
 ### Encode

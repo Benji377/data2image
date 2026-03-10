@@ -7,7 +7,9 @@
     "data2image": "./dist/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
     "build": "tsup"
@@ -26,7 +28,7 @@
     "url": "https://github.com/Benji377/data2image",
     "directory": "packages/cli"
   },
-  "homepage": "https://github.com/Benji377/data2image",
+  "homepage": "https://benji377.github.io/data2image/",
   "dependencies": {
     "@data2image/core": "^1.0.0",
     "commander": "^13.0.0",

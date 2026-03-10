@@ -14,7 +14,9 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
     "build": "tsup",
@@ -29,13 +31,13 @@
     "png",
     "steganography"
   ],
-  "license": "GPL-3.0-only",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Benji377/data2image",
     "directory": "packages/core"
   },
-  "homepage": "https://github.com/Benji377/data2image",
+  "homepage": "https://benji377.github.io/data2image/",
   "dependencies": {
     "pako": "^2.1.0",
     "upng-js": "^2.1.0"

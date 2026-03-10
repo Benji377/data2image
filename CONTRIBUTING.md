@@ -96,4 +96,8 @@ Releases are handled via GitHub Actions with `workflow_dispatch`. Maintainers bu
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the [GPLv3 License](LICENSE).
+By contributing, you agree that:
+
+- Contributions to **@data2image/core** will be licensed under the [MIT License](packages/core/LICENSE) (permissive)
+- Contributions to **data2image** (CLI) will be licensed under the [GPLv3 License](packages/cli/LICENSE) (copyleft)
+- Contributions to the **website** will be licensed under the [GPLv3 License](LICENSE) (copyleft)

@@ -117,4 +117,10 @@ This is an npm workspaces monorepo. See [CONTRIBUTING.md](CONTRIBUTING.md) for d
 
 ## License
 
-[GPLv3](LICENSE)
+This project uses a **hybrid license**:
+
+- **[@data2image/core](packages/core)** (library) - [MIT](packages/core/LICENSE): use freely in any project, open or closed source
+- **[data2image](packages/cli)** (CLI tool) - [GPLv3](packages/cli/LICENSE): copyleft, derivatives must be open source  
+- **Website** - [GPLv3](LICENSE): copyleft, derivatives must be open source
+
+The core library is permissively licensed to maximize adoption. The CLI and website are copyleft to keep them open source.

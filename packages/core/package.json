@@ -1,6 +1,6 @@
 {
   "name": "@data2image/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convert any file to a PNG image and back. Isomorphic encoder/decoder library.",
   "type": "module",
   "main": "./dist/index.cjs",

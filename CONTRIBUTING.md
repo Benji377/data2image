@@ -90,9 +90,36 @@ The core library uses a custom binary format (documented in the [README](README.
 1. Maintain backward compatibility with existing `.d2i.png` files, or
 2. Bump the magic version byte and handle both versions in the decoder
 
-## Releases
+## Release Process
 
-Releases are handled via GitHub Actions with `workflow_dispatch`. Maintainers bump versions manually before triggering publish.
+Releases are handled via GitHub Actions with `workflow_dispatch`. **Maintainers only:**
+
+### Before Publishing
+
+1. **Bump versions** in `package.json` files:
+   - `packages/core/package.json` → update `"version"`
+   - `packages/cli/package.json` → update `"version"`
+   
+2. **Update CHANGELOG.md** with:
+   - New version number and date
+   - Added/Changed/Fixed entries
+   
+3. **Commit and push** changes to `main`
+
+4. **Run GitHub Actions workflow**:
+   - Go to **Actions → Publish to npm → Run workflow**
+   - Select package: `core`, `cli`, or `both`
+   - GitHub will publish using Trusted Publishing (OIDC)
+
+### Versioning (semver)
+
+- **Patch** (`1.0.0` → `1.0.1`) - bug fixes only, no API changes
+- **Minor** (`1.0.0` → `1.1.0`) - new features, backward compatible
+- **Major** (`1.0.0` → `2.0.0`) - breaking changes
+
+### Note
+
+npm does not allow overwriting published versions. Once a version is published, you must bump the version to publish again.
 
 ## License
 

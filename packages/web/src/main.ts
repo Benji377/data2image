@@ -63,7 +63,7 @@ function isD2iPng(file: File): boolean {
 }
 
 function download(name: string, data: Uint8Array) {
-  const blob = new Blob([data]);
+  const blob = new Blob([new Uint8Array(data)]);
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -192,7 +192,7 @@ async function processAll() {
       if (mode === "encode") {
         const pngBytes = encode(bytes, file.name);
         const outputName = `${file.name}.d2i.png`;
-        const blob = new Blob([pngBytes], { type: "image/png" });
+        const blob = new Blob([new Uint8Array(pngBytes)], { type: "image/png" });
         const previewUrl = URL.createObjectURL(blob);
         resultEntries.push({ name: outputName, data: pngBytes, previewUrl });
         addResultItem(outputName, pngBytes, previewUrl);

@@ -25,7 +25,7 @@
   "license": "GPL-3.0-only",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Benji377/data2image",
+    "url": "https://github.com/Benji377/data2image.git",
     "directory": "packages/cli"
   },
   "homepage": "https://benji377.github.io/data2image/",

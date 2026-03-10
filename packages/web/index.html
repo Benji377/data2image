@@ -30,6 +30,26 @@
     <!-- Description -->
     <p class="subtitle">Drop any file to convert it into a PNG image. Drop a <code>.d2i.png</code> to get the original back.</p>
 
+    <!-- Info Section -->
+    <div class="info-section">
+      <h3 class="info-title">How it works</h3>
+      <ul class="info-list">
+        <li><strong>Encode:</strong> Wraps any file into a valid PNG image. The original data is stored in PNG metadata chunks, making it a regular image file that can be shared, uploaded, or stored anywhere images are accepted.</li>
+        <li><strong>Decode:</strong> Extracts the original file from a <code>.d2i.png</code> image, restoring it to its original format and name.</li>
+        <li><strong>Auto Mode:</strong> Automatically detects <code>.d2i.png</code> files and decodes them, encodes everything else.</li>
+      </ul>
+    </div>
+
+    <!-- Mode Selector -->
+    <div class="mode-selector">
+      <label class="mode-label">Default Mode:</label>
+      <div class="mode-buttons">
+        <button id="modeAuto" class="mode-btn mode-btn-active" data-mode="auto">Auto</button>
+        <button id="modeEncode" class="mode-btn" data-mode="encode">Encode</button>
+        <button id="modeDecode" class="mode-btn" data-mode="decode">Decode</button>
+      </div>
+    </div>
+
     <!-- Drop Zone -->
     <div id="dropZone" class="drop-zone" role="button" tabindex="0" aria-label="Drop files here or click to browse">
       <div class="drop-zone-content">

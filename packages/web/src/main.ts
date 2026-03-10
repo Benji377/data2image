@@ -13,6 +13,9 @@ const results = document.getElementById("results")!;
 const resultItems = document.getElementById("resultItems")!;
 const downloadAllBtn = document.getElementById("downloadAllBtn")!;
 const themeToggle = document.getElementById("themeToggle")!;
+const modeAuto = document.getElementById("modeAuto")!;
+const modeEncode = document.getElementById("modeEncode")!;
+const modeDecode = document.getElementById("modeDecode")!;
 
 // ── State ─────────────────────────────────────────────────
 interface QueuedFile {
@@ -28,6 +31,7 @@ interface ResultEntry {
 
 let queue: QueuedFile[] = [];
 let resultEntries: ResultEntry[] = [];
+let defaultMode: "auto" | "encode" | "decode" = "auto";
 
 // ── Theme ─────────────────────────────────────────────────
 function initTheme() {
@@ -50,6 +54,18 @@ function toggleTheme() {
 
 initTheme();
 themeToggle.addEventListener("click", toggleTheme);
+
+// ── Mode Selector ─────────────────────────────────────────
+function setMode(mode: "auto" | "encode" | "decode") {
+  defaultMode = mode;
+  [modeAuto, modeEncode, modeDecode].forEach(btn => btn.classList.remove("mode-btn-active"));
+  const activeBtn = mode === "auto" ? modeAuto : mode === "encode" ? modeEncode : modeDecode;
+  activeBtn.classList.add("mode-btn-active");
+}
+
+modeAuto.addEventListener("click", () => setMode("auto"));
+modeEncode.addEventListener("click", () => setMode("encode"));
+modeDecode.addEventListener("click", () => setMode("decode"));
 
 // ── Helpers ───────────────────────────────────────────────
 function formatSize(bytes: number): string {
@@ -118,10 +134,13 @@ fileInput.addEventListener("change", () => {
 // ── File Queue ────────────────────────────────────────────
 function addFiles(files: FileList) {
   for (const file of files) {
-    queue.push({
-      file,
-      mode: isD2iPng(file) ? "decode" : "encode",
-    });
+    let mode: "encode" | "decode";
+    if (defaultMode === "auto") {
+      mode = isD2iPng(file) ? "decode" : "encode";
+    } else {
+      mode = defaultMode;
+    }
+    queue.push({ file, mode });
   }
   renderFileList();
 }
@@ -135,9 +154,13 @@ function renderFileList() {
   fileList.hidden = false;
   fileItems.innerHTML = "";
 
-  for (const { file, mode } of queue) {
+  queue.forEach((queuedFile, index) => {
+    const { file, mode } = queuedFile;
     const li = document.createElement("li");
     li.className = "file-item";
+    
+    const leftGroup = document.createElement("div");
+    leftGroup.className = "file-item-left";
     
     const nameSpan = document.createElement("span");
     nameSpan.className = "file-item-name";
@@ -148,15 +171,36 @@ function renderFileList() {
     sizeSpan.className = "file-item-size";
     sizeSpan.textContent = formatSize(file.size);
     
-    const badge = document.createElement("span");
+    leftGroup.appendChild(nameSpan);
+    leftGroup.appendChild(sizeSpan);
+    
+    const rightGroup = document.createElement("div");
+    rightGroup.className = "file-item-right";
+    
+    const badge = document.createElement("button");
     badge.className = `file-item-badge ${mode === "encode" ? "badge-encode" : "badge-decode"}`;
     badge.textContent = mode.toUpperCase();
+    badge.title = "Click to toggle mode";
+    badge.addEventListener("click", () => {
+      queue[index].mode = mode === "encode" ? "decode" : "encode";
+      renderFileList();
+    });
     
-    li.appendChild(nameSpan);
-    li.appendChild(sizeSpan);
-    li.appendChild(badge);
+    const processBtn = document.createElement("button");
+    processBtn.className = "file-item-process";
+    processBtn.title = `Process this file (${mode})`;
+    processBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+    processBtn.addEventListener("click", () => {
+      void processSingle(index);
+    });
+    
+    rightGroup.appendChild(badge);
+    rightGroup.appendChild(processBtn);
+    
+    li.appendChild(leftGroup);
+    li.appendChild(rightGroup);
     fileItems.appendChild(li);
-  }
+  });
 }
 
 clearBtn.addEventListener("click", () => {
@@ -224,6 +268,36 @@ async function processAll() {
   processBtn.textContent = "Process All";
 }
 
+async function processSingle(index: number) {
+  if (index < 0 || index >= queue.length) return;
+
+  const { file, mode } = queue[index];
+  results.hidden = false;
+
+  try {
+    const bytes = await readFileAsUint8Array(file);
+
+    if (mode === "encode") {
+      const pngBytes = encode(bytes, file.name);
+      const outputName = `${file.name}.d2i.png`;
+      const blob = new Blob([new Uint8Array(pngBytes)], { type: "image/png" });
+      const previewUrl = URL.createObjectURL(blob);
+      resultEntries.push({ name: outputName, data: pngBytes, previewUrl });
+      addResultItem(outputName, pngBytes, previewUrl);
+    } else {
+      const { filename, data } = decode(bytes);
+      resultEntries.push({ name: filename, data });
+      addResultItem(filename, data);
+    }
+
+    // Remove processed file from queue
+    queue.splice(index, 1);
+    renderFileList();
+  } catch (err) {
+    addResultError(file.name, err instanceof Error ? err.message : "Unknown error");
+  }
+}
+
 function addResultItem(name: string, data: Uint8Array, previewUrl?: string) {
   const li = document.createElement("li");
   li.className = "result-item";
@@ -258,7 +332,10 @@ function addResultItem(name: string, data: Uint8Array, previewUrl?: string) {
 
 function addResultError(name: string, message: string) {
   const li = document.createElement("li");
-  li.className = "result-item";
+  li.className = "result-item result-item-error-container";
+  
+  const mainRow = document.createElement("div");
+  mainRow.className = "result-item-error-row";
   
   const info = document.createElement("div");
   info.className = "result-item-info";
@@ -269,13 +346,37 @@ function addResultError(name: string, message: string) {
   nameSpan.textContent = name;
   info.appendChild(nameSpan);
   
-  const errorSpan = document.createElement("span");
-  errorSpan.className = "result-item-error";
-  errorSpan.title = message;
-  errorSpan.textContent = "Error";
+  const errorBtn = document.createElement("button");
+  errorBtn.className = "result-item-error";
+  errorBtn.innerHTML = `
+    <span>Error</span>
+    <svg class="error-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  `;
+  errorBtn.title = "Click to show error details";
   
-  li.appendChild(info);
-  li.appendChild(errorSpan);
+  mainRow.appendChild(info);
+  mainRow.appendChild(errorBtn);
+  
+  const detailsDiv = document.createElement("div");
+  detailsDiv.className = "result-item-error-details";
+  detailsDiv.style.display = "none";
+  
+  const detailsContent = document.createElement("div");
+  detailsContent.className = "result-item-error-content";
+  detailsContent.textContent = message;
+  detailsDiv.appendChild(detailsContent);
+  
+  let isExpanded = false;
+  errorBtn.addEventListener("click", () => {
+    isExpanded = !isExpanded;
+    detailsDiv.style.display = isExpanded ? "block" : "none";
+    errorBtn.classList.toggle("expanded", isExpanded);
+  });
+  
+  li.appendChild(mainRow);
+  li.appendChild(detailsDiv);
   resultItems.appendChild(li);
 }
 

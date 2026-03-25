@@ -81,7 +81,7 @@ Visit **[benji377.github.io/data2image](https://benji377.github.io/data2image/)*
 
 ## How It Works
 
-1. **Compress**: the input file is compressed with deflate (pako)
+1. **Compress**: the input file is compressed with deflate (fflate)
 2. **Frame**: a binary frame is built:
 
    ```

@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2026-03-25
+
+### Changed
+
+- **Library Migration**: Replaced legacy/unmaintained dependencies with modern alternatives
+  - Swapped `UPNG.js` for `fast-png` (better TypeScript support, actively maintained)
+  - Swapped `pako` for `fflate` (significantly smaller bundle size, 2-3x faster compression)
+- **Tooling**: Migrated from `ts-node` to `tsx` for better ESM/CJS interop and faster execution
+- Added benchmark script to `packages/core` for performance tracking
+
 ## [1.0.2] - 2026-03-10
 
 ### Changed

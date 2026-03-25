@@ -83,7 +83,7 @@ Decodes a Data2Image PNG back to the original file.
 
 ## How It Works
 
-1. **Compress**: file data is deflate-compressed (via pako)
+1. **Compress**: file data is deflate-compressed (via fflate)
 2. **Frame**: binary format with magic bytes, CRC-32, filename, compressed data
 3. **Rasterize**: frame is laid out as RGBA pixels in a square PNG
 4. **Decode**: reverse the process, verify integrity with CRC-32

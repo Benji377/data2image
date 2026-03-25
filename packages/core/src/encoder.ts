@@ -1,5 +1,5 @@
-import { deflate } from "pako";
-import UPNG from "./png.js";
+import { deflateSync } from "fflate";
+import { encode as encodePng } from "fast-png";
 import {
   MAGIC,
   MAGIC_LENGTH,
@@ -30,7 +30,7 @@ export function encode(data: Uint8Array, filename: string): Uint8Array {
   }
 
   // Compress the file data
-  const compressed = deflate(data);
+  const compressed = deflateSync(data);
 
   // Calculate CRC-32 of original data
   const checksum = crc32(data);
@@ -75,7 +75,11 @@ export function encode(data: Uint8Array, filename: string): Uint8Array {
   buffer.set(compressed, offset);
   // Rest is already zero-filled (padding)
 
-  // Create PNG (ps=0 for lossless, forbidPlte=true to keep raw RGBA)
-  const png = UPNG.encode([buffer.buffer], sideLength, sideLength, 0, undefined, true);
-  return new Uint8Array(png);
+  // Create PNG (RGBA)
+  const png = encodePng({
+    width: sideLength,
+    height: sideLength,
+    data: buffer,
+  });
+  return png;
 }

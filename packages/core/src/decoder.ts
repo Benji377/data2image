@@ -1,5 +1,5 @@
-import { inflate } from "pako";
-import UPNG from "./png.js";
+import { inflateSync } from "fflate";
+import { decode as decodePng } from "fast-png";
 import {
   MAGIC_LENGTH,
   PAYLOAD_LENGTH_SIZE,
@@ -24,9 +24,8 @@ export interface DecodeResult {
  */
 export function decode(png: Uint8Array): DecodeResult {
   // Decode PNG to RGBA pixels
-  const img = UPNG.decode(png.buffer as ArrayBuffer);
-  const frames = UPNG.toRGBA8(img);
-  const pixelData = new Uint8Array(frames[0]);
+  const img = decodePng(png);
+  const pixelData = img.data as Uint8Array;
 
   // Verify magic bytes
   if (!matchesMagic(pixelData)) {
@@ -64,7 +63,7 @@ export function decode(png: Uint8Array): DecodeResult {
   const compressed = pixelData.slice(offset, offset + compressedLength);
 
   // Decompress
-  const data = inflate(compressed);
+  const data = inflateSync(compressed);
 
   // Verify CRC-32
   const computedChecksum = crc32(data);

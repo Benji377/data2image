@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2026-04-17
+
+### Changed
+
+- **Build Tooling**: Migrated from unmaintained `tsup` to `tsdown`
+  - Improved TypeScript support and faster builds
+  - Better ESM/CJS dual build output
+
 ## [1.1.0] - 2026-03-25
 
 ### Changed

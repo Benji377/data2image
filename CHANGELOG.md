@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2026-05-09
+
+### Changed
+
+- Migrated tsup to the new version
+- Deprecated Node.js 20
+
 ## [1.2.0] - 2026-04-17
 
 ### Changed

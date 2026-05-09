@@ -1,6 +1,6 @@
 {
   "name": "data2image",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "CLI tool to convert any file to a PNG image and back.",
   "type": "module",
   "bin": {
@@ -31,7 +31,7 @@
   },
   "homepage": "https://benji377.github.io/data2image/",
   "dependencies": {
-    "@data2image/core": "^1.2.0",
+    "@data2image/core": "^1.2.1",
     "commander": "^14.0.0",
     "ora": "^9.0.0",
     "glob": "^13.0.0"

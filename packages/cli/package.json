@@ -33,7 +33,7 @@
   "dependencies": {
     "@data2image/core": "^1.2.1",
     "commander": "^15.0.0",
-    "ora": "^9.0.0",
+    "ora": "^10.0.0",
     "glob": "^14.0.0"
   },
   "devDependencies": {
